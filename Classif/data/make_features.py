@@ -6,12 +6,12 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 
-
 def ratings(rating):
     if rating>3 and rating<=5:
         return 1
     if rating>0 and rating<=3:
         return 0
+
 
 def word_count(review):
     review_list = review.split()
@@ -31,29 +31,8 @@ def clean(review):
 
     return ' '.join(review)
 
+
 def corpus(text):
     text_list = text.split()
     return text_list
 
-
-# text prerocessing
-def text_preprocess(text):
-    """
-    Tokenize
-    Input: Raw text
-
-    Output: Lemmatized texts
-    """
-
-    text = re.sub(r'https?://\S+', '', text)  # remove http links
-    text = re.sub(r"[^a-zA-Z]", " ", text)  # remove punktuation and numbers
-
-    tokens = word_tokenize(text)  # tokenize to words
-
-    lemmatizer = WordNetLemmatizer()
-    stop_words = stopwords.words("english")
-
-    clean_tokens = [lemmatizer.lemmatize(tok).lower().strip() for tok in tokens if
-                    tok not in stop_words]  # lematization and stop words removal
-
-    return ' '.join(clean_tokens)

@@ -21,4 +21,4 @@ def add_sentiment_features(data):
 
 
 data_sent = add_sentiment_features(data)
-data_sent.to_pickle('data_sent.txt')
+data_sent.to_pickle('Sources/data_sent.txt')

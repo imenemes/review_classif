@@ -1,8 +1,7 @@
 import pandas as pd
-import pickle
-from Classif.data.data_prep import *
+from Classif.data.make_features import *
 
-df = pd.read_csv('Data.csv')
+df = pd.read_csv('Sources/Data.csv')
 
 
 def analyse(data):
@@ -12,12 +11,11 @@ def analyse(data):
     data['Average_Word_Length'] = data['char_count']/data['Word_count']
     data['lem'] = data['Review'].apply(clean)
     data['Review_lists'] = data['lem'].apply(corpus)
-    ##data['lem'] = data['Review'].apply(text_preprocess)
     return data
 
 data = analyse(df)
 
-data.to_pickle('data_prep.txt')
+data.to_pickle('Sources/data_prep.txt')
 
 
 
