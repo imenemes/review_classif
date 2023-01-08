@@ -1,9 +1,6 @@
-import re
-from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-import re
-from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+import re
 
 
 def ratings(rating):

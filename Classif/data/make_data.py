@@ -13,6 +13,7 @@ def analyse(data):
     data['Review_lists'] = data['lem'].apply(corpus)
     return data
 
+
 data = analyse(df)
 
 data.to_pickle('Sources/data_prep.txt')
