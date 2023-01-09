@@ -1,0 +1,6 @@
+LogisticRegression(max_iter=1000),RandomForestClassifier()
+0.609,0.519
+0.618,0.553
+0.620,0.577
+
+

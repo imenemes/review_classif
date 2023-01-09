@@ -6,16 +6,19 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
 from Classif.models.train_model import y_sent, y_rate, data, X_features_all
 
-
+X_w2vec = np.load('Sources/Xembed.npy')
 # read results
-result = pd.read_csv('Sources/results.csv')
+result = pd.read_csv('Sources/results_binary.csv')
 print(result.head())
+
+
 
 REG_LIN = Pipeline([
     ('vectorizer', TfidfVectorizer(stop_words=None)),
@@ -35,7 +38,7 @@ def draw_mat(conf_mat,n,names=["negative", "positive"]):
   plt.tick_params(labelsize=12)
   plt.show()
 
-liste =[data.Review, X_features_all]
+liste_features =[data.Review, X_features_all, X_w2vec]
 
 liste_y=[y_sent, y_rate]
 
@@ -51,5 +54,5 @@ def visualise(liste, liste_y):
 
 
 
-visualise(liste, liste_y)
+visualise(liste_features, liste_y)
 

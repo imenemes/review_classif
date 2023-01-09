@@ -7,13 +7,11 @@ from sklearn.neighbors import KNeighborsClassifier
 from Classif.models.train_model import *
 
 
-list_model = [LogisticRegression(max_iter=1000), RandomForestClassifier()] #, DecisionTreeClassifier(), KNeighborsClassifier()]
 
-
-result = train(list_model,liste_feature, y_sent)
+result = train_binary(list_model, liste_feature, y_sent)
 # transform result to dataframe
 df = pd.DataFrame(result, columns=list_model)
 # store it in csv file
-df.to_csv('Sources/results.csv', index=False)
+df.to_csv('Sources/results_binary.csv', index=False)
 print(df)
 

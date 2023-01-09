@@ -10,6 +10,14 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import MinMaxScaler
 # initialise model and vectorizers
 stand = MinMaxScaler()
+# import diffrent classification models based on diffrent techniques
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+
+list_model = [LogisticRegression(max_iter=1000), RandomForestClassifier()] #, DecisionTreeClassifier(), KNeighborsClassifier()]
+
 
 # call the default vectorizer
 tvec = TfidfVectorizer(stop_words=None)
@@ -46,6 +54,8 @@ X_features_all = data.drop(['Rating', 'Sentiment','lem', 'Review_lists', 'scores
 
 liste_feature =[data['lem'], data['Review'], feature_num, feature_pol_num, X_features_all]
 
+
+
 def lmodel_cv(list_model, X, Y, vectorizer=tvec, average_method='binary'):
     results = []
     for model in list_model:
@@ -59,9 +69,12 @@ def lmodel_cv(list_model, X, Y, vectorizer=tvec, average_method='binary'):
     return results
 
 
-def train(list_model, list_feature, y_sent):
+def train_binary(list_model, list_feature, y_sent):
     res = []
     for i, scenario in enumerate(list_feature):
         print('training models on scénario' ,i+1)
-        res.append(lmodel_cv(list_model, scenario, y_sent))
+        if i < 3:
+            res.append(lmodel_cv(list_model, scenario, y_sent))
+        else:
+            res.append(lmodel_cv(list_model, scenario, y_sent, vectorizer=column_transformer))
     return res
